@@ -2,6 +2,7 @@ module github.com/calvinfeng/redisgob
 
 require (
 	github.com/Pallinder/sillyname-go v0.0.0-20130730142914-97aeae9e6ba1
+	github.com/go-redis/redis v6.15.1+incompatible
 	github.com/google/pprof v0.0.0-20190208070709-b421f19a5c07 // indirect
 	github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6 // indirect
 	github.com/spf13/cobra v0.0.3

@@ -14,7 +14,7 @@ func main() {
 		Short: "inter process communication example",
 	}
 
-	root.AddCommand(cmd.Serve, cmd.Dial)
+	root.AddCommand(cmd.Serve, cmd.Dial, cmd.Pull, cmd.Push)
 	if err := root.Execute(); err != nil {
 		log.Fatal(err)
 		os.Exit(1)
