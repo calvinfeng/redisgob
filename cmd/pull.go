@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/gob"
 	"log"
 
 	"github.com/calvinfeng/redisgob/payload"
@@ -22,13 +21,12 @@ func pull(cmd *cobra.Command, args []string) error {
 	}
 
 	q := queue.NewFIFO(cfg)
-	decoder := gob.NewDecoder(q)
 	for {
 		cat := &payload.Cat{}
-		if err := decoder.Decode(cat); err != nil {
-			return err
+		if err := q.Dequeue(cat); err != nil {
+			log.Printf("failed to dequeue %v", err)
+		} else {
+			log.Printf("pulled %d years old cat %s from queue\n", cat.Age, cat.Name)
 		}
-
-		log.Printf("pulled %d years old cat %s from queue\n", cat.Age, cat.Name)
 	}
 }

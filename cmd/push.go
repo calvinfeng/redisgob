@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/gob"
 	"log"
 	"math/rand"
 	"time"
@@ -25,18 +24,17 @@ func push(cmd *cobra.Command, args []string) error {
 	}
 
 	q := queue.NewFIFO(cfg)
-	encoder := gob.NewEncoder(q)
 	for {
 		cat := &payload.Cat{
 			Name: sillyname.GenerateStupidName(),
 			Age:  rand.Intn(20),
 		}
 
-		if err := encoder.Encode(cat); err != nil {
-			return err
+		if err := q.Enqueue(cat); err != nil {
+			log.Printf("failed to push to redis, %v", err)
+		} else {
+			log.Printf("pushed %d years old cat %s to queue", cat.Age, cat.Name)
 		}
-
-		log.Printf("pushed %d years old cat %s to queue", cat.Age, cat.Name)
 
 		time.Sleep(1 * time.Second)
 	}
