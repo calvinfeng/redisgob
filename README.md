@@ -41,29 +41,6 @@ Pull the data from Redis queue in another process
 
     redisgob pull
 
-The queue itself implements `io.Reader` and `io.Writer`. We can pass the queue to the `gob` encoder
-and decoder.
-
-```golang
-cfg := queue.Config{
-    RedisAddr: "localhost:6379",
-    QueueName: "cats",
-}
-
-q := queue.NewFIFO(cfg)
-encoder := gob.NewEncoder(q)
-```
-
-```golang
-cfg := queue.Config{
-    RedisAddr: "localhost:6379",
-    QueueName: "cats",
-}
-
-q := queue.NewFIFO(cfg)
-decoder := gob.Decoder(q)
-```
-
 ## Honcho
 
 Create a virtual environment and install honcho
