@@ -63,3 +63,13 @@ cfg := queue.Config{
 q := queue.NewFIFO(cfg)
 decoder := gob.Decoder(q)
 ```
+
+## Honcho
+
+Create a virtual environment and install honcho
+
+    pip install honcho
+
+Now let's run the pusher and puller
+
+    honcho start -c puller=5
